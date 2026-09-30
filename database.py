@@ -11,11 +11,3 @@ if not MONGO_URI:
 client = AsyncIOMotorClient(MONGO_URI)
 db = client["labelguard_db"]  # Database object imported in main.py
 users_collection = db["users"]
-"""from motor.motor_asyncio import AsyncIOMotorClient
-
-MONGO_URI = "mongodb+srv://dev-46:AdminPass123@creature3.eb9voxx.mongodb.net/?appName=Creature3"
-client = AsyncIOMotorClient(MONGO_URI)
-
-db = client.labelguard_db
-users_collection = db.users
-"""
