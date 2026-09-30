@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabelGuard — Directorate Admin Console</title>
+    <meta name="description" content="Enterprise Admin Dashboard for LabelGuard Directorate Oversight — Legal Metrology Enforcement Platform.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           DESIGN TOKENS — Dark Slate Obsidian
+        ============================================================ */
+        :root {
+            --bg-root:          #080C14;
+            --bg-sidebar:       #0A0F1C;
+            --bg-main:          #0B0F17;
+            --bg-card:          rgba(30, 41, 59, 0.60);
+            --bg-card-solid:    #131C2E;
+            --bg-input:         rgba(15, 23, 42, 0.80);
+            --bg-hover:         rgba(56, 189, 248, 0.05);
+
+            --border-subtle:    rgba(255, 255, 255, 0.07);
+            --border-card:      rgba(255, 255, 255, 0.08);
+            --border-glow:      rgba(56, 189, 248, 0.20);
+            --border-input:     rgba(148, 163, 184, 0.14);
+
+            --text-primary:     #F8FAFC;
+            --text-secondary:   #CBD5E1;
+            --text-muted:       #94A3B8;
+            --text-faint:       #64748B;
+
+            --accent-sky:       #38BDF8;
+            --accent-indigo:    #6366F1;
+            --accent-violet:    #8B5CF6;
+
+            --success:          #10B981;
+            --success-dim:      rgba(16, 185, 129, 0.12);
+            --success-border:   rgba(16, 185, 129, 0.20);
+            --danger:           #EF4444;
+            --danger-dim:       rgba(239, 68, 68, 0.12);
+            --danger-border:    rgba(239, 68, 68, 0.20);
+            --warning:          #F59E0B;
+            --warning-dim:      rgba(245, 158, 11, 0.12);
+            --warning-border:   rgba(245, 158, 11, 0.20);
+
+            --sidebar-w:        280px;
+            --r-sm:             6px;
+            --r-md:             10px;
+            --r-lg:             14px;
+            --r-xl:             20px;
+
+            --shadow-card:      0 10px 30px -10px rgba(0,0,0,0.5);
+            --shadow-glow-sky:  0 0 30px rgba(56, 189, 248, 0.07);
+            --shadow-btn:       0 2px 12px rgba(56, 189, 248, 0.22);
+
+            --ease-fast:        0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-smooth:      0.30s cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-spring:      0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* ============================================================
+           RESET & BASE
+        ============================================================ */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 15px; }
+        body {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            background: var(--bg-root);
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ============================================================
+           SCROLLBAR
+        ============================================================ */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.13); border-radius: 99px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(148,163,184,0.22); }
+
+        /* ============================================================
+           AMBIENT BACKGROUND GLOWS
+        ============================================================ */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        body::before {
+            width: 700px;
+            height: 700px;
+            top: -180px;
+            right: -160px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.055) 0%, transparent 65%);
+        }
+        body::after {
+            width: 500px;
+            height: 500px;
+            bottom: -120px;
+            left: calc(var(--sidebar-w) + 60px);
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.04) 0%, transparent 65%);
+        }
+
+        /* ============================================================
+           SIDEBAR
+        ============================================================ */
+        .sidebar {
+            width: var(--sidebar-w);
+            min-width: var(--sidebar-w);
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0; left: 0; bottom: 0;
+            z-index: 200;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+
+        /* ---- Brand ---- */
+        .brand {
+            padding: 26px 22px 22px;
+            border-bottom: 1px solid #334155;
+            position: relative;
+            overflow: hidden;
+        }
+        .brand::before {
+            content: '';
+            position: absolute;
+            top: -30px; left: -30px;
+            width: 160px; height: 160px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(56,189,248,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .brand-eyebrow {
+            font-size: 0.64rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent-sky);
+            margin-bottom: 7px;
+            opacity: 0.75;
+        }
+        .brand-title {
+            font-size: 1.08rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            background: linear-gradient(130deg, #F8FAFC 0%, #38BDF8 45%, #A78BFA 85%);
+            background-size: 220% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 6s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% center; }
+            50%       { background-position: 200% center; }
+        }
+        .brand-pill {
+            display: inline-block;
+            margin-top: 9px;
+            padding: 3px 10px;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 99px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* ---- Nav ---- */
+        .nav-items {
+            flex: 1;
+            list-style: none;
+            padding: 14px 10px;
+            overflow-y: auto;
+        }
+        .nav-section-label {
+            padding: 6px 14px 4px;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+            margin-bottom: 2px;
+        }
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 10px 14px;
+            margin-bottom: 3px;
+            cursor: pointer;
+            border-radius: var(--r-md);
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: all var(--ease-fast);
+            position: relative;
+            user-select: none;
+            letter-spacing: -0.005em;
+        }
+        .nav-icon {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+            opacity: 0.8;
+        }
+        .nav-item:hover {
+            background: var(--bg-hover);
+            color: var(--text-secondary);
+            transform: translateX(4px);
+        }
+        .nav-item.active {
+            background: linear-gradient(120deg, rgba(56,189,248,0.13), rgba(99,102,241,0.09));
+            color: var(--accent-sky);
+            font-weight: 600;
+            box-shadow: inset 0 0 0 1px rgba(56,189,248,0.13);
+        }
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 50%;
+            transform: translateY(-50%);
+            width: 3px; height: 22px;
+            border-radius: 0 3px 3px 0;
+            background: linear-gradient(180deg, var(--accent-sky), var(--accent-indigo));
+            box-shadow: 0 0 8px rgba(56,189,248,0.4);
+        }
+        .nav-item.active .nav-icon { opacity: 1; }
+
+        /* ---- Sidebar Footer / Profile ---- */
+        .sign-out-container {
+            padding: 14px 14px 18px;
+            border-top: 1px solid var(--border-subtle);
+        }
+        .profile-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 12px;
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--r-lg);
+        }
+        .profile-avatar {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-sky), var(--accent-indigo));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 2px rgba(56,189,248,0.2), 0 0 14px rgba(56,189,248,0.1);
+        }
+        .profile-info { flex: 1; min-width: 0; }
+        .profile-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .profile-name span { color: var(--text-primary); }
+        .profile-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: var(--success);
+            margin-top: 2px;
+            letter-spacing: 0.02em;
+        }
+        .status-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--success);
+            flex-shrink: 0;
+            animation: pulse-dot 2.2s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16,185,129,0.5); }
+            50%       { opacity: 0.75; box-shadow: 0 0 0 5px rgba(16,185,129,0); }
+        }
+        .sign-out-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            width: 100%;
+            padding: 9px 14px;
+            background: var(--danger-dim);
+            color: var(--danger);
+            border: 1px solid var(--danger-border);
+            border-radius: var(--r-sm);
+            font-weight: 600;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: all var(--ease-fast);
+            font-family: inherit;
+            letter-spacing: 0.01em;
+        }
+        .sign-out-btn:hover {
+            background: rgba(239,68,68,0.18);
+            border-color: rgba(239,68,68,0.32);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(239,68,68,0.15);
+        }
+        .sign-out-btn:active { transform: translateY(0); }
+
+        /* ============================================================
+           MAIN CONTENT AREA
+        ============================================================ */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-w);
+            padding: 40px 44px;
+            overflow-y: auto;
+            background: var(--bg-main);
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============================================================
+           SECTION TRANSITIONS
+        ============================================================ */
+        .section {
+            display: none;
+            opacity: 0;
+        }
+        .section.active,
+        .section.active-section {
+            display: block;
+            animation: fadeInUp 0.38s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================================
+           PAGE HEADERS
+        ============================================================ */
+        .page-header { margin-bottom: 30px; }
+        .header-eyebrow {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent-sky);
+            margin-bottom: 8px;
+            opacity: 0.8;
+        }
+        .header-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.035em;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-sky) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+        .header-sub {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+        .header-rule {
+            width: 44px;
+            height: 3px;
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--accent-sky), var(--accent-indigo));
+            margin-top: 18px;
+            opacity: 0.55;
+        }
+
+        /* ============================================================
+           CARDS
+        ============================================================ */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--r-xl);
+            padding: 26px 28px;
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            margin-bottom: 22px;
+            transition: border-color var(--ease-fast), box-shadow var(--ease-fast);
+        }
+        .card:hover {
+            border-color: rgba(56,189,248,0.14);
+            box-shadow: var(--shadow-card), var(--shadow-glow-sky);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .card-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+        .card-sub {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* ============================================================
+           METRIC GRID — Analytics
+        ============================================================ */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+        .metric-card {
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--r-xl);
+            padding: 28px 26px 24px;
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: border-color var(--ease-fast), transform var(--ease-smooth), box-shadow var(--ease-smooth);
+        }
+        .metric-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-card), 0 16px 40px rgba(0,0,0,0.22);
+        }
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            border-radius: var(--r-xl) var(--r-xl) 0 0;
+        }
+        .metric-card::after {
+            content: '';
+            position: absolute;
+            bottom: -50px; right: -50px;
+            width: 140px; height: 140px;
+            border-radius: 50%;
+            opacity: 0.07;
+            pointer-events: none;
+        }
+        .metric-card.mc-success::before { background: linear-gradient(90deg, #10B981, #34D399, #2DD4BF); }
+        .metric-card.mc-success::after  { background: #10B981; }
+        .metric-card.mc-sky::before     { background: linear-gradient(90deg, #38BDF8, #6366F1); }
+        .metric-card.mc-sky::after      { background: #38BDF8; }
+        .metric-card.mc-danger::before  { background: linear-gradient(90deg, #EF4444, #F97316); }
+        .metric-card.mc-danger::after   { background: #EF4444; }
+
+        .metric-glow {
+            position: absolute;
+            top: -20px; right: -20px;
+            width: 100px; height: 100px;
+            border-radius: 50%;
+            filter: blur(32px);
+            opacity: 0.12;
+            pointer-events: none;
+        }
+        .mc-success .metric-glow { background: #10B981; }
+        .mc-sky     .metric-glow { background: #38BDF8; }
+        .mc-danger  .metric-glow { background: #EF4444; }
+
+        .metric-label {
+            font-size: 0.67rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+            margin-bottom: 16px;
+        }
+        .metric-value {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            line-height: 1;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+        }
+        .metric-value.success { color: var(--success); text-shadow: 0 0 24px rgba(16,185,129,0.25); }
+        .metric-value.sky     { color: var(--accent-sky); text-shadow: 0 0 24px rgba(56,189,248,0.25); }
+        .metric-value.danger  { color: var(--danger); text-shadow: 0 0 24px rgba(239,68,68,0.25); }
+        .metric-trend {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 4px 11px;
+            border-radius: 99px;
+            letter-spacing: 0.01em;
+        }
+        .metric-trend.up   { color: var(--success); background: var(--success-dim); border: 1px solid var(--success-border); }
+        .metric-trend.down { color: var(--danger);  background: var(--danger-dim);  border: 1px solid var(--danger-border); }
+
+        /* ============================================================
+           TABLES
+        ============================================================ */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: var(--r-lg);
+            border: 1px solid var(--border-subtle);
+        }
+        table { width: 100%; border-collapse: collapse; }
+        thead th {
+            text-align: left;
+            padding: 13px 18px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+            background: rgba(10, 15, 28, 0.60);
+            border-bottom: 1px solid #334155;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(8px);
+            white-space: nowrap;
+        }
+        tbody td {
+            padding: 14px 18px;
+            font-size: 0.84rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid #334155;
+            transition: background var(--ease-fast);
+            vertical-align: middle;
+        }
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover td { background: rgba(255,255,255,0.02); }
+
+        /* ============================================================
+           BADGES
+        ============================================================ */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            white-space: nowrap;
+        }
+        .badge::before {
+            content: '';
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .badge.violation {
+            background: var(--danger-dim);
+            color: var(--danger);
+            border: 1px solid var(--danger-border);
+        }
+        .badge.violation::before { background: var(--danger); }
+        .badge.compliant {
+            background: var(--success-dim);
+            color: var(--success);
+            border: 1px solid var(--success-border);
+        }
+        .badge.compliant::before { background: var(--success); }
+
+        /* ============================================================
+           BUTTONS
+        ============================================================ */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #0F172A, #1E293B);
+            color: var(--accent-sky);
+            border: 1px solid rgba(56,189,248,0.22);
+            border-radius: var(--r-sm);
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all var(--ease-fast);
+            letter-spacing: 0.01em;
+            box-shadow: 0 2px 10px rgba(56,189,248,0.1);
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1e4675 0%, #243f6e 100%);
+            border-color: rgba(56,189,248,0.40);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(56,189,248,0.18);
+        }
+        .btn-primary:active { transform: translateY(0) scale(0.98); }
+        .btn-primary:focus-visible { outline: 2px solid var(--accent-sky); outline-offset: 2px; }
+
+        .btn-success {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, #065f46, #059669);
+            color: #d1fae5;
+            border: 1px solid rgba(16,185,129,0.3);
+            border-radius: var(--r-sm);
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all var(--ease-fast);
+        }
+        .btn-success:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(16,185,129,0.3); filter: brightness(1.1); }
+        .btn-success:active { transform: scale(0.98); }
+
+        .btn-danger {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, #7f1d1d, #dc2626);
+            color: #fee2e2;
+            border: 1px solid rgba(239,68,68,0.3);
+            border-radius: var(--r-sm);
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all var(--ease-fast);
+        }
+        .btn-danger:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(239,68,68,0.3); filter: brightness(1.1); }
+        .btn-danger:active { transform: scale(0.98); }
+
+        
+        .btn-approve {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, #0F172A, #1E293B);
+            color: var(--success);
+            border: 1px solid var(--success-border);
+            border-radius: var(--r-sm);
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all var(--ease-fast);
+            box-shadow: 0 0 10px rgba(16,185,129,0.1);
+        }
+        .btn-approve:hover { transform: scale(0.98); box-shadow: 0 0 15px rgba(16,185,129,0.3); }
+        
+        .btn-reject {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, #0F172A, #1E293B);
+            color: var(--danger);
+            border: 1px solid var(--danger-border);
+            border-radius: var(--r-sm);
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all var(--ease-fast);
+            box-shadow: 0 0 10px rgba(239,68,68,0.1);
+        }
+        .btn-reject:hover { transform: scale(0.98); box-shadow: 0 0 15px rgba(239,68,68,0.3); }
+
+        /* ============================================================
+           SETTINGS FORM
+        ============================================================ */
+        .settings-card { max-width: 660px; }
+        .settings-card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        .settings-desc {
+            font-size: 0.8rem;
+            color: var(--text-faint);
+            margin-bottom: 26px;
+            line-height: 1.6;
+        }
+        .form-group { margin-bottom: 22px; }
+        .field-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            letter-spacing: 0.03em;
+        }
+        .form-input {
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-input);
+            border-radius: var(--r-sm);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            outline: none;
+            transition: all var(--ease-fast);
+        }
+        .form-input:focus { border-color: var(--accent-sky); box-shadow: 0 0 0 3px rgba(56,189,248,0.12); }
+        .form-input::placeholder { color: var(--text-faint); }
+
+        .settings-divider { height: 1px; background: var(--border-subtle); margin: 6px 0 20px; }
+
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #334155;
+        }
+        .toggle-group:last-of-type { border-bottom: none; }
+        .toggle-label-text { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); }
+        .toggle-switch { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
+        .toggle-switch input[type="checkbox"] { opacity: 0; width: 0; height: 0; position: absolute; }
+        .toggle-slider {
+            position: absolute;
+            inset: 0;
+            background: rgba(100,116,139,0.4);
+            border-radius: 99px;
+            cursor: pointer;
+            transition: all var(--ease-fast);
+            border: 1px solid var(--border-subtle);
+        }
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            width: 18px; height: 18px;
+            left: 2px; top: 2px;
+            background: white;
+            border-radius: 50%;
+            transition: all var(--ease-fast);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+        .toggle-switch input:checked + .toggle-slider { background: linear-gradient(135deg, var(--accent-sky), var(--accent-indigo)); border-color: transparent; }
+        .toggle-switch input:checked + .toggle-slider::before { transform: translateX(20px); }
+        .toggle-switch input:focus-visible + .toggle-slider { box-shadow: 0 0 0 3px rgba(56,189,248,0.22); }
+
+        .btn-save {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 28px;
+            margin-top: 26px;
+            background: linear-gradient(135deg, var(--accent-sky), var(--accent-indigo));
+            color: white;
+            border: none;
+            border-radius: var(--r-sm);
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all var(--ease-fast);
+            box-shadow: 0 2px 12px rgba(56,189,248,0.25);
+            letter-spacing: 0.01em;
+        }
+        .btn-save:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(56,189,248,0.35); filter: brightness(1.08); }
+        .btn-save:active { transform: translateY(0) scale(0.98); }
+
+        /* ============================================================
+           EMPTY STATE
+        ============================================================ */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 56px 20px;
+            gap: 12px;
+        }
+        .empty-icon { font-size: 2.6rem; opacity: 0.35; }
+        .empty-title { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); }
+        .empty-sub   { font-size: 0.8rem; color: var(--text-faint); }
+
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+        @media (max-width: 1100px) {
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 860px) {
+            .grid-3 { grid-template-columns: 1fr; }
+            .sidebar { width: 230px; min-width: 230px; }
+            .main-content { margin-left: 230px; padding: 28px 22px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-eyebrow">Admin Console</div>
+            <div class="brand-title">🏛️ Directorate Oversight</div>
+            <div class="brand-pill">HQ Appellate Command</div>
+        </div>
+
+        <ul class="nav-items">
+            <li class="nav-section-label">Operations</li>
+            <li id="nav-reports" class="nav-item active" onclick="switchTab('reports')">
+                <span class="nav-icon">📥</span> Incoming Reports
+            </li>
+            <li id="nav-requests" class="nav-item" onclick="switchTab('requests')">
+                <span class="nav-icon">👤</span> Officer Requests
+            </li>
+            <li id="nav-repository" class="nav-item" onclick="switchTab('repository')">
+                <span class="nav-icon">⏱️</span> Statewide Repository
+            </li>
+
+            <li class="nav-section-label" style="margin-top: 10px;">Intelligence</li>
+            <li id="nav-analytics" class="nav-item" onclick="switchTab('analytics')">
+                <span class="nav-icon">📊</span> Statewide Analytics
+            </li>
+
+            <li class="nav-section-label" style="margin-top: 10px;">System</li>
+            <li id="nav-settings" class="nav-item" onclick="switchTab('settings')">
+                <span class="nav-icon">⚙️</span> Settings
+            </li>
+        </ul>
+
+        <div class="sign-out-container">
+            <div class="profile-badge">
+                <div class="profile-avatar">A</div>
+                <div class="profile-info">
+                    <div class="profile-name">Admin: <span id="admin-id-display">Loading...</span></div>
+                    <div class="profile-status">
+                        <span class="status-dot"></span> Verified
+                    </div>
+                </div>
+            </div>
+            <button class="sign-out-btn" onclick="handleSignOut()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Sign Out
+            </button>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- 1. Reports -->
+        <section id="reports" class="section active">
+            <div class="page-header">
+                <div class="header-eyebrow">Live Queue</div>
+                <h1 class="header-title">Incoming Field Reports &amp; Review Queue</h1>
+                <p class="header-sub">Authenticate optical evidence submitted by field inspectors. Approve or reject findings below.</p>
+                <div class="header-rule"></div>
+            </div>
+            <div class="card">
+                <div class="empty-state">
+                    <div class="empty-icon">📭</div>
+                    <div class="empty-title">Queue is clear</div>
+                    <div class="empty-sub">No pending field reports require review at this time.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Requests -->
+        <section id="requests" class="section">
+            <div class="page-header">
+                <div class="header-eyebrow">Accreditation Hub</div>
+                <h1 class="header-title">Officer Requests &amp; Accreditation Hub</h1>
+                <p class="header-sub">Review pending field inspector authorizations and zone access applications.</p>
+                <div class="header-rule"></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Pending Officer Applications</div>
+                        <div class="card-sub">Approve or reject zone access requests below.</div>
+                    </div>
+                    <button onclick="fetchOfficerRequests()" class="btn-primary">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                        Refresh Requests
+                    </button>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Employee ID</th>
+                                <th>Name / Details</th>
+                                <th>Requested Zone</th>
+                                <th>Date Applied</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="requests-table-body">
+                            <!-- Loaded dynamically via script.js -->
+                            <tr><td colspan="5" style="color: var(--text-faint); text-align: center; padding: 28px;">Click <strong style="color:var(--accent-sky)">Refresh Requests</strong> to load pending officer applications.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Repository -->
+        <section id="repository" class="section">
+            <div class="page-header">
+                <div class="header-eyebrow">Evidence Vault</div>
+                <h1 class="header-title">Scan Repository</h1>
+                <p class="header-sub">Review and manage all historical AI-powered label compliance scans indexed from the field.</p>
+                <div class="header-rule"></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">YOLO / OCR Scan History</div>
+                        <div class="card-sub">AI-detected field data from all registered inspectors.</div>
+                    </div>
+                    <button onclick="fetchYOLOScans()" class="btn-primary">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                        Refresh YOLO OCR Scans
+                    </button>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Scan ID</th>
+                                <th>Inspector</th>
+                                <th>YOLO Detected Fields</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scans-table-body">
+                            <!-- Loaded dynamically via script.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Analytics -->
+        <section id="analytics" class="section">
+            <div class="page-header">
+                <div class="header-eyebrow">Statutory Intelligence</div>
+                <h1 class="header-title">Legal Metrology Statutory Reports</h1>
+                <p class="header-sub">Enforcement audit trails, compounding fine statistics, and rule-wise compliance metrics.</p>
+                <div class="header-rule"></div>
+            </div>
+            <div class="grid-3">
+                <div class="metric-card mc-success">
+                    <div class="metric-glow"></div>
+                    <div class="metric-label">Statutory Compliance Index</div>
+                    <div class="metric-value success">88.66%</div>
+                    <span class="metric-trend up">&#8593; 3.2% from last quarter</span>
+                </div>
+                <div class="metric-card mc-sky">
+                    <div class="metric-glow"></div>
+                    <div class="metric-label">Compounding Fines Levied</div>
+                    <div class="metric-value sky">&#8377;1.48 Cr</div>
+                    <span class="metric-trend up">&#8593; &#8377;12L recovered this month</span>
+                </div>
+                <div class="metric-card mc-danger">
+                    <div class="metric-glow"></div>
+                    <div class="metric-label">Total Show-Cause Notices</div>
+                    <div class="metric-value danger">2,341</div>
+                    <span class="metric-trend down">&#8595; 8.1% reduction in violations</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Settings -->
+        <section id="settings" class="section">
+            <div class="page-header">
+                <div class="header-eyebrow">Rules Engine</div>
+                <h1 class="header-title">Administrative Governance &amp; Rules Engine</h1>
+                <p class="header-sub">Statutory parameter calibration under Legal Metrology Act.</p>
+                <div class="header-rule"></div>
+            </div>
+            <div class="card settings-card">
+                <div class="settings-card-title">Packaged Commodities Rules (PCR 2011) Thresholds</div>
+                <p class="settings-desc">Configure statutory compliance parameters for automated enforcement and OCR validation pipelines.</p>
+                <div class="settings-divider"></div>
+
+                <div class="form-group">
+                    <label class="field-label">Rule 7 — Minimum PDP Font Height (mm)</label>
+                    <input type="text" value="1.5" class="form-input" placeholder="e.g. 1.5">
+                </div>
+
+                <div class="toggle-group">
+                    <span class="toggle-label-text">Enforce Maximum Retail Price (MRP)</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="toggle-group">
+                    <span class="toggle-label-text">Mandatory Consumer Care Contact</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <button class="btn-save">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    Save Configuration
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- External Script Integration -->
+    <script src="script.js"></script>
+</body>
+</html>

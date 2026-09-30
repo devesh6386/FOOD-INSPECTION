@@ -1,0 +1,61 @@
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    font-family: sans-serif; 
+}
+
+.dashboard-container { 
+    display: flex; 
+    height: 100vh; /* Takes up full browser height */
+}
+
+/* Sidebar Styling */
+.sidebar { 
+    width: 260px; 
+    background-color: #f8f9fa; 
+    padding: 20px; 
+    border-right: 1px solid #ddd; 
+}
+.sidebar h2 { margin-bottom: 30px; font-size: 1.5rem; color: #0f172a; }
+#nav-menu { list-style: none; }
+
+.nav-item { 
+    padding: 12px 15px; 
+    margin-bottom: 5px; 
+    cursor: pointer; 
+    border-radius: 6px; 
+    color: #475569; 
+    transition: 0.2s;
+}
+.nav-item:hover { background-color: #e2e8f0; }
+
+/* The highlighted state for the active menu item */
+.nav-item.active { 
+    background-color: #dbeafe; 
+    color: #1e40af; 
+    font-weight: bold; 
+}
+
+/* Specific styling for the 7th item (Sign out) */
+.sign-out { 
+    color: #ef4444; 
+    margin-top: 20px; 
+    border-top: 1px solid #ddd; 
+    border-radius: 0; 
+}
+.sign-out:hover { background-color: #fee2e2; }
+
+/* Main Content Area */
+.content-area { 
+    flex-grow: 1; 
+    padding: 40px; 
+    background-color: #ffffff; 
+    overflow-y: auto; 
+}
+
+/* Hide all sections by default */
+.content-section { display: none; } 
+
+/* Only show the section with the active class */
+.content-section.active-section { display: block; }

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabelGuard Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #334155;
+        }
+        .login-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .logo-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #64748b;
+            margin-top: 5px;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            text-align: left;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .input-group label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .forgot-link {
+            text-transform: none;
+            color: #0f172a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 15px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .input-group input:focus {
+            border-color: #0f172a;
+        }
+        .input-icon {
+            position: absolute;
+            left: 12px;
+            top: 36px;
+            color: #94a3b8;
+            font-size: 18px;
+        }
+        .submit-btn {
+            width: 100%;
+            background-color: #0b1528;
+            color: #ffffff;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 5px;
+        }
+        .submit-btn:hover {
+            background-color: #1e293b;
+        }
+        .submit-btn:disabled {
+            background-color: #64748b;
+            cursor: not-allowed;
+        }
+        
+        /* Simulate Access Tier Widget Styling */
+        .simulation-box {
+            margin-top: 25px;
+            text-align: center;
+        }
+        .simulation-label {
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .tier-toggle {
+            display: inline-flex;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .tier-btn {
+            flex: 1;
+            padding: 8px 0;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: transparent;
+            color: #64748b;
+        }
+        .tier-btn.active {
+            background: #0f172a;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .demo-notice {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #475569;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        
+        .footer-text {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 30px;
+            line-height: 1.5;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 20px;
+        }
+        #alert-box {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            display: none;
+            text-align: left;
+        }
+        .success { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .error { background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h1 class="logo-title">LabelGuard</h1>
+    <p class="subtitle">Secure Institutional Access</p>
+
+    <!-- Login Form -->
+    <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="input-group">
+            <label for="employee_id">Employee ID / Badge ID</label>
+            <span class="input-icon">⛨</span>
+            <input type="text" id="employee_id" value="OFC-7491" required>
+        </div>
+
+        <div class="input-group">
+            <label for="password">
+                Password
+                <a href="#" class="forgot-link">Forgot password?</a>
+            </label>
+            <span class="input-icon">🔒</span>
+            <input type="password" id="password" value="inspectorpass" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">Sign In &rarr;</button>
+    </form>
+
+    <!-- Simulate Access Tier Widget -->
+    <div class="simulation-box">
+        <span class="simulation-label">Simulate Access Tier</span>
+        <div class="tier-toggle">
+            <button type="button" id="inspectorBtn" class="tier-btn active" onclick="setRole('inspector')">Inspector</button>
+            <button type="button" id="adminBtn" class="tier-btn" onclick="setRole('admin')">Admin</button>
+        </div>
+    </div>
+
+    <div class="demo-notice">
+        <span>✨</span> Active demo mode: Click <b>Sign In</b> to explore full portal.
+    </div>
+
+    <div id="alert-box"></div>
+
+    <div class="footer-text">
+        Department of Consumer Affairs — Legal Metrology Enforcement Portal<br>
+        Pursuant to Legal Metrology Act, 2009 & Packaged Commodities Rules 2011
+    </div>
+</div>
+
+<script>
+    // Toggle role button styles and auto-fill credentials
+    function setRole(role) {
+        const inspectorBtn = document.getElementById('inspectorBtn');
+        const adminBtn = document.getElementById('adminBtn');
+        const employeeIdInput = document.getElementById('employee_id');
+        const passwordInput = document.getElementById('password');
+
+        if (role === 'inspector') {
+            inspectorBtn.classList.add('active');
+            adminBtn.classList.remove('active');
+            employeeIdInput.value = "OFC-7491";
+            passwordInput.value = "inspectorpass";
+        } else {
+            adminBtn.classList.add('active');
+            inspectorBtn.classList.remove('active');
+            employeeIdInput.value = "ADM-9002";
+            passwordInput.value = "adminpass123";
+        }
+    }
+
+    async function handleLogin(event) {
+        event.preventDefault();
+
+        const submitBtn = document.getElementById('submitBtn');
+        const alertBox = document.getElementById('alert-box');
+
+        // Reset alert box and set loading button state
+        alertBox.style.display = 'none';
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Signing In...";
+
+        // 1. Get field values
+        const employeeId = document.getElementById('employee_id').value;
+        const password = document.getElementById('password').value;
+
+        // 2. Format request as x-www-form-urlencoded
+        const payload = new URLSearchParams();
+        payload.append('username', employeeId);
+        payload.append('password', password);
+
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: payload
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem('access_token', data.access_token);
+                
+                try {
+                    // Safe token parsing
+                    const tokenPayload = JSON.parse(atob(data.access_token.split('.')[1]));
+                    
+                    if (tokenPayload.role === "Admin") {
+                        window.location.href = "/admin-dashboard";
+                    } else {
+                        window.location.href = "/inspector-dashboard";
+                    }
+                } catch (parseError) {
+                    console.error("Token decoding error:", parseError);
+                    // Fallback redirect if payload parsing fails
+                    window.location.href = "/admin-dashboard";
+                }
+            } else {
+                let errorMessage = "Login failed.";
+                if (typeof data.detail === "string") {
+                    errorMessage = data.detail;
+                } else if (Array.isArray(data.detail)) {
+                    errorMessage = data.detail.map(err => `${err.loc[1]}: ${err.msg}`).join(", ");
+                }
+                
+                showAlert(errorMessage, "error");
+            }
+        } 
+        catch (err) {
+            showAlert("Server connection failed.", "error");
+        } 
+        finally {
+            submitBtn.innerText = "Sign In →";
+            submitBtn.disabled = false;
+        }
+    }
+
+    function showAlert(message, type) {
+        const alertBox = document.getElementById('alert-box');
+        alertBox.innerText = message;
+        alertBox.className = type;
+        alertBox.style.display = 'block';
+    }
+</script>
+
+</body>
+</html>

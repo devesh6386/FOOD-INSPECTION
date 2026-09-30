@@ -1,0 +1,74 @@
+{
+  "ensemble_configuration": [
+    {
+      "weights": "/Users/deveshgupta/Desktop/labelguard auth/yolo_pipeline/models/yolo26n-seg.pt",
+      "task": "segment",
+      "allowed_classes": [
+        "CONSUMER_CARE",
+        "PRINCIPAL_DISPLAY_PANEL"
+      ]
+    },
+    {
+      "weights": "/Users/deveshgupta/Desktop/labelguard auth/yolo_pipeline/models/yolov8n.pt",
+      "task": "segment",
+      "allowed_classes": [
+        "GENERIC_NAME"
+      ]
+    },
+    {
+      "weights": "/Users/deveshgupta/Desktop/labelguard auth/yolo_pipeline/models/yolov8n-seg.pt",
+      "task": "segment",
+      "allowed_classes": [
+        "BARCODE",
+        "MANUFACTURER",
+        "STAMP_PANEL",
+        "INFO_PANEL"
+      ]
+    }
+  ],
+  "confidence_threshold": 0.25,
+  "generated_on": "2026-09-25T16:00:59",
+  "image_file": "IMG_20260923_030129.jpg",
+  "image_width": 2800,
+  "image_height": 2071,
+  "num_detections": 1,
+  "detections": [
+    {
+      "detection_id": 0,
+      "class_name": "GENERIC_NAME",
+      "class_id": 2,
+      "confidence": 0.4262,
+      "bbox_pixels": {
+        "x_min": 1054.6,
+        "y_min": 904.4,
+        "x_max": 1852.9,
+        "y_max": 1000.6
+      },
+      "bbox_normalized": {
+        "x_center": 0.51919,
+        "y_center": 0.45992,
+        "width": 0.28508,
+        "height": 0.04645
+      },
+      "polygon_pixels": [
+        [
+          1056.6,
+          905.6
+        ],
+        [
+          1056.6,
+          999.7
+        ],
+        [
+          1852.8,
+          999.7
+        ],
+        [
+          1852.8,
+          905.6
+        ]
+      ],
+      "crop_path": null
+    }
+  ]
+}

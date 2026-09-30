@@ -1,0 +1,157 @@
+{
+  "ensemble_configuration": [
+    {
+      "weights": "c:\\Users\\bhada\\Desktop\\FOOD-INSPECTION\\models\\yolo26n-seg.pt",
+      "task": "segment",
+      "allowed_classes": [
+        "CONSUMER_CARE",
+        "PRINCIPAL_DISPLAY_PANEL"
+      ]
+    },
+    {
+      "weights": "c:\\Users\\bhada\\Desktop\\FOOD-INSPECTION\\models\\yolov8n.pt",
+      "task": "segment",
+      "allowed_classes": [
+        "GENERIC_NAME"
+      ]
+    },
+    {
+      "weights": "c:\\Users\\bhada\\Desktop\\FOOD-INSPECTION\\models\\yolov8n-seg.pt",
+      "task": "segment",
+      "allowed_classes": [
+        "BARCODE",
+        "MANUFACTURER",
+        "STAMP_PANEL",
+        "INFO_PANEL"
+      ]
+    }
+  ],
+  "confidence_threshold": 0.25,
+  "generated_on": "2026-09-23T23:23:38",
+  "image_file": "IMG_20260923_030058.jpg",
+  "image_width": 2863,
+  "image_height": 2182,
+  "num_detections": 6,
+  "detections": [
+    {
+      "detection_id": 0,
+      "class_name": "GENERIC_NAME",
+      "class_id": 2,
+      "confidence": 0.733,
+      "bbox_pixels": {
+        "x_min": 276.2,
+        "y_min": 858.1,
+        "x_max": 931.1,
+        "y_max": 956.6
+      },
+      "bbox_normalized": {
+        "x_center": 0.21085,
+        "y_center": 0.41583,
+        "width": 0.22873,
+        "height": 0.04517
+      },
+      "polygon_pixels": null,
+      "crop_path": null
+    },
+    {
+      "detection_id": 1,
+      "class_name": "STAMP_PANEL",
+      "class_id": 6,
+      "confidence": 0.9542,
+      "bbox_pixels": {
+        "x_min": 2191.6,
+        "y_min": 1267.5,
+        "x_max": 2432.5,
+        "y_max": 1715.0
+      },
+      "bbox_normalized": {
+        "x_center": 0.80755,
+        "y_center": 0.68342,
+        "width": 0.08414,
+        "height": 0.20509
+      },
+      "polygon_pixels": null,
+      "crop_path": null
+    },
+    {
+      "detection_id": 2,
+      "class_name": "INFO_PANEL",
+      "class_id": 3,
+      "confidence": 0.8718,
+      "bbox_pixels": {
+        "x_min": 1857.9,
+        "y_min": 1258.1,
+        "x_max": 2141.6,
+        "y_max": 1736.4
+      },
+      "bbox_normalized": {
+        "x_center": 0.69848,
+        "y_center": 0.68618,
+        "width": 0.09911,
+        "height": 0.21917
+      },
+      "polygon_pixels": null,
+      "crop_path": null
+    },
+    {
+      "detection_id": 3,
+      "class_name": "BARCODE",
+      "class_id": 0,
+      "confidence": 0.8419,
+      "bbox_pixels": {
+        "x_min": 1817.9,
+        "y_min": 1758.9,
+        "x_max": 2361.8,
+        "y_max": 2002.5
+      },
+      "bbox_normalized": {
+        "x_center": 0.72995,
+        "y_center": 0.86192,
+        "width": 0.18998,
+        "height": 0.11163
+      },
+      "polygon_pixels": null,
+      "crop_path": null
+    },
+    {
+      "detection_id": 4,
+      "class_name": "MANUFACTURER",
+      "class_id": 4,
+      "confidence": 0.8263,
+      "bbox_pixels": {
+        "x_min": 1010.0,
+        "y_min": 833.7,
+        "x_max": 1822.2,
+        "y_max": 1063.4
+      },
+      "bbox_normalized": {
+        "x_center": 0.49462,
+        "y_center": 0.43472,
+        "width": 0.2837,
+        "height": 0.10527
+      },
+      "polygon_pixels": null,
+      "crop_path": null
+    },
+    {
+      "detection_id": 5,
+      "class_name": "MANUFACTURER",
+      "class_id": 4,
+      "confidence": 0.6936,
+      "bbox_pixels": {
+        "x_min": 990.8,
+        "y_min": 1193.5,
+        "x_max": 1827.8,
+        "y_max": 1381.5
+      },
+      "bbox_normalized": {
+        "x_center": 0.49223,
+        "y_center": 0.59005,
+        "width": 0.29235,
+        "height": 0.08619
+      },
+      "polygon_pixels": null,
+      "crop_path": null
+    }
+  ]
+}

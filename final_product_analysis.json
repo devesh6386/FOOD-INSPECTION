@@ -1,0 +1,455 @@
+{
+    "product_report": [
+        {
+            "image": "IMG_20260923_030058.jpg",
+            "scale_pixels_per_mm": 13.89,
+            "fields": [
+                {
+                    "class_name": "GENERIC_NAME",
+                    "type": "text_extraction",
+                    "extracted_data": [
+                        {
+                            "text": "Faky melt-in-the-mouth pieces",
+                            "confidence": 0.929,
+                            "physical_width_mm": 39.02,
+                            "physical_height_mm": 4.1
+                        },
+                        {
+                            "text": "(arnished with almonds and pistachios",
+                            "confidence": 0.866,
+                            "physical_width_mm": 46.37,
+                            "physical_height_mm": 3.74
+                        }
+                    ]
+                },
+                {
+                    "class_name": "STAMP_PANEL",
+                    "type": "text_extraction",
+                    "extracted_data": [
+                        {
+                            "text": "HWADZ",
+                            "confidence": 0.101,
+                            "physical_width_mm": 12.17,
+                            "physical_height_mm": 4.1
+                        },
+                        {
+                            "text": "85/18/2",
+                            "confidence": 0.233,
+                            "physical_width_mm": 12.24,
+                            "physical_height_mm": 3.74
+                        },
+                        {
+                            "text": "PrAN",
+                            "confidence": 0.05,
+                            "physical_width_mm": 12.6,
+                            "physical_height_mm": 5.26
+                        },
+                        {
+                            "text": "4.",
+                            "confidence": 0.113,
+                            "physical_width_mm": 4.03,
+                            "physical_height_mm": 3.46
+                        },
+                        {
+                            "text": "209",
+                            "confidence": 0.132,
+                            "physical_width_mm": 8.78,
+                            "physical_height_mm": 4.61
+                        }
+                    ]
+                },
+                {
+                    "class_name": "INFO_PANEL",
+                    "type": "text_extraction",
+                    "extracted_data": [
+                        {
+                            "text": "NET QUANTITY",
+                            "confidence": 0.775,
+                            "physical_width_mm": 20.45,
+                            "physical_height_mm": 4.61
+                        },
+                        {
+                            "text": "MFG. DATE",
+                            "confidence": 0.614,
+                            "physical_width_mm": 15.26,
+                            "physical_height_mm": 4.32
+                        },
+                        {
+                            "text": "USE BY",
+                            "confidence": 0.891,
+                            "physical_width_mm": 10.22,
+                            "physical_height_mm": 4.46
+                        },
+                        {
+                            "text": "BATCH NO.",
+                            "confidence": 0.855,
+                            "physical_width_mm": 14.83,
+                            "physical_height_mm": 4.46
+                        },
+                        {
+                            "text": "MRP ?",
+                            "confidence": 0.98,
+                            "physical_width_mm": 9.5,
+                            "physical_height_mm": 4.32
+                        },
+                        {
+                            "text": "(NCL OF ALL TAXES)",
+                            "confidence": 0.797,
+                            "physical_width_mm": 18.86,
+                            "physical_height_mm": 3.89
+                        },
+                        {
+                            "text": "UNIT SALE PRICE",
+                            "confidence": 0.777,
+                            "physical_width_mm": 21.6,
+                            "physical_height_mm": 4.46
+                        },
+                        {
+                            "text": "SERVING PER PACK",
+                            "confidence": 0.998,
+                            "physical_width_mm": 21.6,
+                            "physical_height_mm": 4.46
+                        }
+                    ]
+                },
+                {
+                    "class_name": "BARCODE",
+                    "type": "text_extraction",
+                    "extracted_data": [
+                        {
+                            "text": "8",
+                            "confidence": 0.408,
+                            "physical_width_mm": 2.88,
+                            "physical_height_mm": 3.74
+                        },
+                        {
+                            "text": "904063",
+                            "confidence": 1.0,
+                            "physical_width_mm": 13.97,
+                            "physical_height_mm": 4.32
+                        },
+                        {
+                            "text": "251077",
+                            "confidence": 0.51,
+                            "physical_width_mm": 13.68,
+                            "physical_height_mm": 4.46
+                        }
+                    ]
+                },
+                {
+                    "class_name": "MANUFACTURER",
+                    "type": "text_extraction",
+                    "extracted_data": [
+                        {
+                            "text": "Marketed By:",
+                            "confidence": 0.99,
+                            "physical_width_mm": 17.35,
+                            "physical_height_mm": 4.1
+                        },
+                        {
+                            "text": "HALDIRAM SNACKS FOOD PRIVATE LIMITED ,",
+                            "confidence": 0.909,
+                            "physical_width_mm": 58.39,
+                            "physical_height_mm": 4.61
+                        },
+                        {
+                            "text": "Haldiram",
+                            "confidence": 0.803,
+                            "physical_width_mm": 12.24,
+                            "physical_height_mm": 3.46
+                        },
+                        {
+                            "text": "Kherki Daula,",
+                            "confidence": 0.968,
+                            "physical_width_mm": 17.57,
+                            "physical_height_mm": 3.74
+                        },
+                        {
+                            "text": "Delhi",
+                            "confidence": 0.843,
+                            "physical_width_mm": 7.2,
+                            "physical_height_mm": 3.17
+                        },
+                        {
+                            "text": "Jaipur Highway;",
+                            "confidence": 0.823,
+                            "physical_width_mm": 21.17,
+                            "physical_height_mm": 3.96
+                        },
+                        {
+                            "text": "Gurugram",
+                            "confidence": 1.0,
+                            "physical_width_mm": 13.75,
+                            "physical_height_mm": 4.46
+                        },
+                        {
+                            "text": "122001, Haryana.",
+                            "confidence": 0.936,
+                            "physical_width_mm": 23.26,
+                            "physical_height_mm": 4.82
+                        },
+                        {
+                            "text": "Village",
+                            "confidence": 1.0,
+                            "physical_width_mm": 9.29,
+                            "physical_height_mm": 3.38
+                        }
+                    ]
+                },
+                {
+                    "class_name": "MANUFACTURER",
+                    "type": "text_extraction",
+                    "extracted_data": [
+                        {
+                            "text": "Manufactured By:",
+                            "confidence": 0.762,
+                            "physical_width_mm": 23.11,
+                            "physical_height_mm": 3.96
+                        },
+                        {
+                            "text": "HALDIRAM SNACKS FOOD PRIVATE LIMITED ,",
+                            "confidence": 0.753,
+                            "physical_width_mm": 59.04,
+                            "physical_height_mm": 3.74
+                        },
+                        {
+                            "text": "B-1, Sector-63, Noida-201307",
+                            "confidence": 0.68,
+                            "physical_width_mm": 37.87,
+                            "physical_height_mm": 3.46
+                        },
+                        {
+                            "text": "Gautam Budh Nagar; (UP), India.",
+                            "confidence": 0.81,
+                            "physical_width_mm": 42.05,
+                            "physical_height_mm": 4.54
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "image": "IMG_20260923_030058.jpg",
+            "scale_pixels_per_mm": 13.89,
+            "fields": [
+                {
+                    "class_name": "GENERIC_NAME",
+                    "type": "text_extraction",
+                    "extracted_data": [
+                        {
+                            "text": "Faky melt-in-the-mouth pieces",
+                            "confidence": 0.929,
+                            "physical_width_mm": 39.02,
+                            "physical_height_mm": 4.1
+                        },
+                        {
+                            "text": "arnished with almonds and pistachios",
+                            "confidence": 0.987,
+                            "physical_width_mm": 46.37,
+                            "physical_height_mm": 3.74
+                        }
+                    ]
+                },
+                {
+                    "class_name": "STAMP_PANEL",
+                    "type": "text_extraction",
+                    "extracted_data": [
+                        {
+                            "text": "HWADZ",
+                            "confidence": 0.101,
+                            "physical_width_mm": 12.17,
+                            "physical_height_mm": 4.1
+                        },
+                        {
+                            "text": "85/18/2",
+                            "confidence": 0.233,
+                            "physical_width_mm": 12.24,
+                            "physical_height_mm": 3.74
+                        },
+                        {
+                            "text": "319",
+                            "confidence": 0.212,
+                            "physical_width_mm": 8.64,
+                            "physical_height_mm": 4.54
+                        },
+                        {
+                            "text": "Nt",
+                            "confidence": 0.281,
+                            "physical_width_mm": 11.95,
+                            "physical_height_mm": 3.89
+                        }
+                    ]
+                },
+                {
+                    "class_name": "INFO_PANEL",
+                    "type": "text_extraction",
+                    "extracted_data": [
+                        {
+                            "text": "NET QUANTITY",
+                            "confidence": 0.766,
+                            "physical_width_mm": 20.59,
+                            "physical_height_mm": 4.46
+                        },
+                        {
+                            "text": "MFG. DATE",
+                            "confidence": 0.554,
+                            "physical_width_mm": 15.26,
+                            "physical_height_mm": 4.32
+                        },
+                        {
+                            "text": "USE BY",
+                            "confidence": 0.984,
+                            "physical_width_mm": 10.22,
+                            "physical_height_mm": 4.46
+                        },
+                        {
+                            "text": "BATCH NO",
+                            "confidence": 0.983,
+                            "physical_width_mm": 14.54,
+                            "physical_height_mm": 4.46
+                        },
+                        {
+                            "text": "MRP ?",
+                            "confidence": 0.863,
+                            "physical_width_mm": 9.22,
+                            "physical_height_mm": 4.32
+                        },
+                        {
+                            "text": "(NCL OF ALL TAXES)",
+                            "confidence": 0.565,
+                            "physical_width_mm": 19.01,
+                            "physical_height_mm": 3.89
+                        },
+                        {
+                            "text": "UNIT SALE PRICE",
+                            "confidence": 0.626,
+                            "physical_width_mm": 21.31,
+                            "physical_height_mm": 4.46
+                        },
+                        {
+                            "text": "SERVING PER PACK ",
+                            "confidence": 0.861,
+                            "physical_width_mm": 21.31,
+                            "physical_height_mm": 4.46
+                        }
+                    ]
+                },
+                {
+                    "class_name": "BARCODE",
+                    "type": "text_extraction",
+                    "extracted_data": [
+                        {
+                            "text": "8",
+                            "confidence": 0.495,
+                            "physical_width_mm": 2.88,
+                            "physical_height_mm": 3.74
+                        },
+                        {
+                            "text": "904063",
+                            "confidence": 1.0,
+                            "physical_width_mm": 13.97,
+                            "physical_height_mm": 4.32
+                        },
+                        {
+                            "text": "251077",
+                            "confidence": 0.51,
+                            "physical_width_mm": 13.68,
+                            "physical_height_mm": 4.46
+                        }
+                    ]
+                },
+                {
+                    "class_name": "MANUFACTURER",
+                    "type": "text_extraction",
+                    "extracted_data": [
+                        {
+                            "text": "Marketed By:",
+                            "confidence": 0.986,
+                            "physical_width_mm": 17.35,
+                            "physical_height_mm": 4.1
+                        },
+                        {
+                            "text": "HALDIRAM SNACKS FOOD PRIVATE LIMITED ,",
+                            "confidence": 0.908,
+                            "physical_width_mm": 58.39,
+                            "physical_height_mm": 4.61
+                        },
+                        {
+                            "text": "Haldiram",
+                            "confidence": 0.822,
+                            "physical_width_mm": 12.24,
+                            "physical_height_mm": 3.46
+                        },
+                        {
+                            "text": "Kherki Daula,",
+                            "confidence": 0.968,
+                            "physical_width_mm": 17.57,
+                            "physical_height_mm": 3.74
+                        },
+                        {
+                            "text": "Delhi",
+                            "confidence": 1.0,
+                            "physical_width_mm": 7.2,
+                            "physical_height_mm": 3.17
+                        },
+                        {
+                            "text": "Jaipur Highway;",
+                            "confidence": 0.823,
+                            "physical_width_mm": 21.17,
+                            "physical_height_mm": 3.96
+                        },
+                        {
+                            "text": "Gurugram",
+                            "confidence": 1.0,
+                            "physical_width_mm": 13.75,
+                            "physical_height_mm": 4.46
+                        },
+                        {
+                            "text": "122001, Haryana.",
+                            "confidence": 0.958,
+                            "physical_width_mm": 23.4,
+                            "physical_height_mm": 4.9
+                        },
+                        {
+                            "text": "Village",
+                            "confidence": 1.0,
+                            "physical_width_mm": 9.29,
+                            "physical_height_mm": 3.38
+                        }
+                    ]
+                },
+                {
+                    "class_name": "MANUFACTURER",
+                    "type": "text_extraction",
+                    "extracted_data": [
+                        {
+                            "text": "Manufactured By:",
+                            "confidence": 0.762,
+                            "physical_width_mm": 23.11,
+                            "physical_height_mm": 3.96
+                        },
+                        {
+                            "text": "HALDIRAM SNACKS FOOD PRIVATE LIMITED,",
+                            "confidence": 0.998,
+                            "physical_width_mm": 59.04,
+                            "physical_height_mm": 3.74
+                        },
+                        {
+                            "text": "B-1, Sector-63, Noida-201307",
+                            "confidence": 0.68,
+                            "physical_width_mm": 37.87,
+                            "physical_height_mm": 3.46
+                        },
+                        {
+                            "text": "Gautam Budh Nagar; (UP), India.",
+                            "confidence": 0.514,
+                            "physical_width_mm": 42.05,
+                            "physical_height_mm": 4.54
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "total_images_processed": 2
+}
